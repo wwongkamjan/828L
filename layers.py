@@ -31,7 +31,7 @@ class Linear:
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
-        self.out_array = np.dot(self.in_array, self.W)
+        self.out_array = np.dot(self.in_array.out_array, self.W)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
@@ -74,7 +74,7 @@ class Bias:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
-        self.out_array = self.in_array + self.W
+        self.out_array = self.in_layer.out_array + self.W
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
@@ -99,7 +99,7 @@ class SquareLoss:
         self.in_array = self.in_layer.forward()
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of mean squared error, and store it as self.out_array
-        self.out_array = (1/2*(self.num_data ))*np.abs(self.in_layer - self.labels)**2
+        self.out_array = (1/2*(self.num_data ))*np.abs(self.in_layer.out_array - self.labels)**2
         return self.out_array
     def backward(self):
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
