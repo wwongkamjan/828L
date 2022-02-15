@@ -92,7 +92,7 @@ def main(test=False):
         train_data = data_dict['train']
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(trainer.get_num_iters_on_public_test())
+        trainer.train(100)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
