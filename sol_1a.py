@@ -57,7 +57,6 @@ class Trainer:
         # you have to return loss for the function 
 
         #forward pass - from input layer - to loss layer
-        out_layer = self.data_layer
         for i in range(len(self.network.modules)):
             self.network.modules[i].forward()
 
