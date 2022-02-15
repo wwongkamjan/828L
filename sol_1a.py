@@ -65,7 +65,7 @@ class Trainer:
         loss = self.loss_layer.forward()
         self.loss_layer.backward()
         self.optim.step()
-        print(loss)
+        # print(loss)
         return loss
     def get_num_iters_on_public_test(self):
         #TODO: adjust this number to how much iterations you want to train on the public test dataset for this problem.
@@ -77,6 +77,7 @@ class Trainer:
         for i in range (num_iter):
             train_losses.append(self.train_step())
         # you have to return train_losses for the function
+        print(train_losses[-1])
         return train_losses
     
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
@@ -92,7 +93,7 @@ def main(test=False):
         train_data = data_dict['train']
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(1000)
+        trainer.train(10000)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
