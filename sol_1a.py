@@ -10,7 +10,7 @@ class Network(layers.BaseNetwork):
         super().__init__()
         #TODO: define your network architecture here
         self.linear = layers.Linear(data_layer,1)
-        self.bias = layers.Bias(data_layer)
+        self.bias = layers.Bias(self.linear)
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
