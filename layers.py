@@ -173,7 +173,7 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            m.W -= self.lr*m.G
+            m.W -= self.lr*np.mean(m.G)
 
 def is_modules_with_parameters(value):
     return isinstance(value, Linear) or isinstance(value, Bias)
