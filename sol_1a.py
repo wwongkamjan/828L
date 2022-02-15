@@ -93,7 +93,7 @@ def main(test=False):
         train_data = data_dict['train']
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(10000)
+        trainer.train(30000)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
