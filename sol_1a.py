@@ -63,8 +63,7 @@ class Trainer:
 
         #get loss
         loss = self.loss_layer.forward()
-        dwnstrm = loss
-        self.loss_layer.backward(dwnstrm)
+        self.loss_layer.backward()
         self.optim.step()
 
         return loss
