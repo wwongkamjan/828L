@@ -104,7 +104,7 @@ class SquareLoss:
     def backward(self):
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        self.pass_back = (1/self.num_data)* (self.out_array - self.labels)
+        self.pass_back = (1/self.num_data)* (self.in_array - self.labels)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(self.pass_back) 
         pass
@@ -173,7 +173,7 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            m.W -= self.lr*m.G
+            m.W -= self.lr*np.mean(m.G)
 
 def is_modules_with_parameters(value):
     return isinstance(value, Linear) or isinstance(value, Bias)
