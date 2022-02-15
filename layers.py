@@ -31,7 +31,7 @@ class Linear:
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
-        self.out_array = np.dot(self.in_array.out_array, self.W)
+        self.out_array = np.dot(self.in_layer.out_array, self.W)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
