@@ -21,7 +21,6 @@ class Network(layers.BaseNetwork):
         
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
         self.set_output_layer(self.bias)
-        # self.modules.append(self.get_output_layer)
 
 class Trainer:
     def __init__(self):
@@ -60,7 +59,7 @@ class Trainer:
         #forward pass - from input layer - to loss layer
         out_layer = self.data_layer
         for i in range(len(self.network.modules)):
-            out_layer = self.modules[i].forward(out_layer)
+            out_layer = self.network.modules[i].forward(out_layer)
 
         #get loss
         loss = self.loss_layer.forward(self.out_layer)
