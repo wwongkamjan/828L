@@ -89,8 +89,8 @@ class Trainer:
 
         modules = self.network.get_modules_with_parameters()
         for i in range(len(modules)):
-            modules[i].forward()
-        predict = self.loss_layer.forward()
+            predict = modules[i].forward()
+
         for i in range(len(predict)):
             print(predict[i] - y[i])
         # return train_losses
