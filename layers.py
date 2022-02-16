@@ -117,7 +117,7 @@ class SquareLoss:
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         # print((self.in_array - self.labels).shape)
         self.pass_back = (self.in_array - self.labels)*(1/self.num_data)
-        # print(self.pass_back)
+        print("cost shape", self.pass_back.shape)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(self.pass_back) 
         pass
