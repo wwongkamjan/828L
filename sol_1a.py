@@ -66,7 +66,7 @@ class Trainer:
         loss = self.loss_layer.forward()
         self.loss_layer.backward()
         self.optim.step()
-        # print(loss)
+        print(loss)
         return loss
     def get_num_iters_on_public_test(self):
         #TODO: adjust this number to how much iterations you want to train on the public test dataset for this problem.
