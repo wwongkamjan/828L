@@ -26,12 +26,12 @@ class Linear:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array e.g. self.out_dims = np.array([x, y])
         self.out_dims = np.array([num_data,num_out_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.reshape(np.random.normal(0,1,num_in_features), (num_in_features,1))
+        self.W = np.reshape(np.random.normal(0,1,num_in_features), (1,num_in_features))
     def forward(self):
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
-        self.out_array = np.dot(self.in_array, self.W) #self.in_array *self.W 
+        self.out_array = np.dot(self.in_array, self.W.T) #self.in_array *self.W 
         # print(self.in_layer.out_dims)
         # print(self.W.shape)
         return self.out_array
@@ -42,7 +42,7 @@ class Linear:
         # print(dwnstrm.shape)
         
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = np.dot(dwnstrm, self.W.T) # dwnstrm*self.W
+        input_grad = np.dot(dwnstrm, self.W) # dwnstrm*self.W
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
 
@@ -79,7 +79,7 @@ class Bias:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
         self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.reshape(np.random.normal(0,1,num_in_features), (num_in_features,1))
+        self.W = np.reshape(np.random.normal(0,1,num_in_features), (1,num_in_features))
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
@@ -87,7 +87,7 @@ class Bias:
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.mean(dwnstrm)
+        self.G = dwnstrm
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
         # hand this gradient backward to the layer behind
@@ -184,7 +184,7 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            m.W -= self.lr*m.G
+            m.W -= self.lr*np.mean(m.G, axis=0)
 
 def is_modules_with_parameters(value):
     return isinstance(value, Linear) or isinstance(value, Bias)
