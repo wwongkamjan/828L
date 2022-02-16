@@ -52,11 +52,13 @@ class Relu:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Relu function, and store it as self.out_array
-        self.out_array = 
+        self.out_array = np.maximum(np.zeros(self.in_dims),self.in_array)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = 
+        out_array = self.out_array.copy()
+        out_array[out_array > 0] = 1
+        input_grad = out_array*dwnstrm
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
         pass
