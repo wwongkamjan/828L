@@ -73,7 +73,6 @@ class Trainer:
         #forward pass - from input layer - to loss layer
         modules = self.network.get_modules_with_parameters()
         for i in range(len(modules)):
-            print(modules[i].__class__.__name__)
             modules[i].forward()
 
         #get loss
