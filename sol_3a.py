@@ -2,7 +2,6 @@ import layers
 import numpy as np
 import matplotlib.pyplot as plt
 import data_generators as data
-from copy import deepcopy
 
 class Network(layers.BaseNetwork):
     #TODO: you might need to pass additional arguments to init for prob 2, 3, 4 and mnist
