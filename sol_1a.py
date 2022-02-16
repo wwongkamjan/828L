@@ -80,6 +80,21 @@ class Trainer:
         # you have to return train_losses for the function
         print(train_losses[-1])
         return train_losses
+        
+    def test(self, test_data):
+        x, y = test_data
+        data_layer = layers.Data(x)
+        self.network.linear.in_layer = data_layer
+        self.loss_layer.labels =  y
+
+        modules = self.network.get_modules_with_parameters()
+        for i in range(len(modules)):
+            modules[i].forward()
+        predict = self.loss_layer.forward()
+        for i in range(len(predict)):
+            print(predict[i] - y[i])
+        # return train_losses
+        
     
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
 def main(test=False):
