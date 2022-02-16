@@ -87,7 +87,7 @@ class Bias:
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = dwnstrm
+        self.G = np.mean(dwnstrm)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
         # hand this gradient backward to the layer behind
