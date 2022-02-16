@@ -90,10 +90,11 @@ class Trainer:
         modules = self.network.get_modules_with_parameters()
         for i in range(len(modules)):
             predict = modules[i].forward()
-
+        error = 0
         for i in range(len(predict)):
-            print(predict[i] - y[i])
-        # return train_losses
+            error += predict[i] - y[i]
+            print("predict: ", predict[i], " label: ", y[i])
+        return np.sum(error)
         
     
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
