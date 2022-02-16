@@ -37,7 +37,7 @@ class Linear:
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.dot(dwnstrm,self.in_array)
+        self.G = np.dot(dwnstrm.T,self.in_array)
         # print(self.G.shape)
         # print("in",self.in_array.shape)
         # print(dwnstrm.shape)
