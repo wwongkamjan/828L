@@ -14,7 +14,7 @@ class Network(layers.BaseNetwork):
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
-        # self.modules = layers.ModuleList()
+        self.modules = layers.ModuleList()
         # self.modules.append(self.linear)
         # self.modules.append(self.bias)
 
@@ -49,8 +49,8 @@ class Trainer:
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.SquareLoss(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
-        print(self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(0.07, self.network.modules)
+        print(self.network.modules)
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
@@ -58,8 +58,7 @@ class Trainer:
         # you have to return loss for the function 
 
         #forward pass - from input layer - to loss layer
-        print(self.network.get_modules_with_parameters())
-        for i in range(len(self.network.get_modules_with_parameters())):
+        for i in range(len(self.network.modules)):
             self.network.modules[i].forward()
 
         #get loss
