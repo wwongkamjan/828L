@@ -111,7 +111,7 @@ class Trainer:
             error += predict[i] - y[i]
             print("predict: ", predict[i], " label: ", y[i])
         return np.sum(error)
-        
+
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
 def main(test=False):
 
@@ -127,6 +127,7 @@ def main(test=False):
         test_data = data_dict['test']
         trainer.setup(train_data)
         trainer.train(30000)
+        trainer.test(test_data)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
