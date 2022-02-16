@@ -8,6 +8,7 @@ class Data:
         self.data = data
         # self.out_dims is the shape of the output of this layer
         self.out_dims = data.shape
+        print(data.shape)
     def set_data(self, data):
         self.data = data
         self.out_dims = data.shape
