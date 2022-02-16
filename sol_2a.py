@@ -107,6 +107,7 @@ def main(test=False):
         # Your code goes here.
         data_dict = data.data_2a()
         train_data = data_dict['train']
+        print(train_data.shape)
         test_data = data_dict['test']
         trainer.setup(train_data)
         trainer.train(10000)
