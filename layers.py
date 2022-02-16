@@ -38,8 +38,8 @@ class Linear:
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
         self.G = np.dot(self.in_array.T, dwnstrm)
-        print(self.in_array.shape)
-        print(dwnstrm.shape)
+        # print(self.in_array.shape)
+        # print(dwnstrm.shape)
         
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = np.dot(dwnstrm, self.W.T) # dwnstrm*self.W
