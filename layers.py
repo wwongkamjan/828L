@@ -32,8 +32,8 @@ class Linear:
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
         self.out_array = np.dot(self.in_array ,self.W) #np.dot(self.W.T, self.in_array)
-        # print(self.in_layer.out_dims)
-        # print(self.W.shape)
+        print(self.in_layer.out_dims)
+        print(self.W.shape)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
@@ -179,7 +179,7 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            m.W += self.lr*np.mean(m.G)
+            m.W -= self.lr*np.mean(m.G)
 
 def is_modules_with_parameters(value):
     return isinstance(value, Linear) or isinstance(value, Bias)
