@@ -39,7 +39,7 @@ class Linear:
         # TODO: Compute the gradient of the output with respect to W, and store it as G
         self.G = np.dot(self.in_array.T, dwnstrm)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = np.dot(dwnstrm,self.W)
+        input_grad = np.dot(dwnstrm,self.W) # dwnstrm*self.W
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
 
@@ -111,6 +111,7 @@ class SquareLoss:
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         self.pass_back = (self.in_array - self.labels) *(1/self.num_data)
+        print(self.pass_back)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(self.pass_back) 
         pass
