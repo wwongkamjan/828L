@@ -98,6 +98,7 @@ class SquareLoss:
     def __init__(self, in_layer, labels):
         self.in_layer = in_layer
         self.labels = labels
+        print(labels.shape)
     def set_data(self, labels):
         self.labels = labels
     def forward(self):
@@ -111,7 +112,7 @@ class SquareLoss:
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         self.pass_back = (self.in_array - self.labels) #*(1/self.num_data)
-        print(self.pass_back)
+        # print(self.pass_back)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(self.pass_back) 
         pass
