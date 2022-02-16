@@ -96,6 +96,21 @@ class Trainer:
         # you have to return train_losses for the function
         print(train_losses[-1])
         return train_losses
+
+    def test(self, test_data):
+        x, y = test_data
+        data_layer = layers.Data(x)
+        self.network.linear.in_layer = data_layer
+        self.loss_layer.labels =  y
+
+        modules = self.network.get_modules_with_parameters()
+        for i in range(len(modules)):
+            predict = modules[i].forward()
+        error = 0
+        for i in range(len(predict)):
+            error += predict[i] - y[i]
+            print("predict: ", predict[i], " label: ", y[i])
+        return np.sum(error)
     
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
 def main(test=False):
@@ -112,6 +127,7 @@ def main(test=False):
         test_data = data_dict['test']
         trainer.setup(train_data)
         trainer.train(30000)
+        trainer.test(test_data)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
