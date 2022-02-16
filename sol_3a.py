@@ -2,6 +2,7 @@ import layers
 import numpy as np
 import matplotlib.pyplot as plt
 import data_generators as data
+from copy import deepcopy
 
 class Network(layers.BaseNetwork):
     #TODO: you might need to pass additional arguments to init for prob 2, 3, 4 and mnist
@@ -14,17 +15,17 @@ class Network(layers.BaseNetwork):
         # self.relu = layers.Relu(self.bias_hidden_1)
 
         self.modules = layers.ModuleList()
-        layer = data_layer.copy()
+        layer = deepcopy(data_layer)
         for i in range(hidden_layers):
             self.modules.append(layers.Linear(layer,hidden_units))
-            layer = self.modules[-1].copy() # hidden layer
+            layer = deepcopy(self.modules[-1]) # hidden layer
             self.modules.append(layers.Bias(layer))
-            layer = self.modules[-1].copy()
+            layer = deepcopy(self.modules[-1])
             self.modules.append(layers.Relu(layer))
-            layer = self.modules[-1].copy()
+            layer = deepcopy(self.modules[-1])
 
         self.modules.append(layers.Linear(layer,1)) 
-        layer = self.modules[-1].copy()
+        layer = deepcopy(self.modules[-1])
         self.modules.append(layers.Bias(layer))
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
