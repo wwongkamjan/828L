@@ -15,18 +15,14 @@ class Network(layers.BaseNetwork):
         # self.relu = layers.Relu(self.bias_hidden_1)
 
         self.modules = layers.ModuleList()
-        layer = deepcopy(data_layer)
+        self.modules.append(data_layer)
         for i in range(hidden_layers):
-            self.modules.append(layers.Linear(layer,hidden_units))
-            layer = deepcopy(self.modules[-1]) # hidden layer
-            self.modules.append(layers.Bias(layer))
-            layer = deepcopy(self.modules[-1])
-            self.modules.append(layers.Relu(layer))
-            layer = deepcopy(self.modules[-1])
+            self.modules.append(layers.Linear(self.modules[-1],hidden_units))
+            self.modules.append(layers.Bias(self.modules[-1]))
+            self.modules.append(layers.Relu(self.modules[-1]))
 
-        self.modules.append(layers.Linear(layer,1)) 
-        layer = deepcopy(self.modules[-1])
-        self.modules.append(layers.Bias(layer))
+        self.modules.append(layers.Linear(self.modules[-1],1)) 
+        self.modules.append(layers.Bias(self.modules[-1]))
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
