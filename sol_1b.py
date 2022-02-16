@@ -93,6 +93,8 @@ def main(test=False):
         data_dict = data.data_1b()
         train_data = data_dict['train']
         test_data = data_dict['test']
+        x, y = train_data
+        print(y)
         trainer.setup(train_data)
         trainer.train(30000)
 
