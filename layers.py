@@ -76,7 +76,7 @@ class Bias:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
         self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.normal(0,1,num_in_features)
+        self.W = np.reshape(np.random.normal(0,1,num_in_features), (num_in_features,1))
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
@@ -110,8 +110,8 @@ class SquareLoss:
     def backward(self):
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        print((self.in_array - self.labels).shape)
-        self.pass_back = (self.in_array - self.labels) #*(1/self.num_data)
+        # print((self.in_array - self.labels).shape)
+        self.pass_back = (self.in_array - self.labels)*(1/self.num_data)
         # print(self.pass_back)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(self.pass_back) 
