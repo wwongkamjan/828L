@@ -64,7 +64,7 @@ class Relu:
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         out_array = self.out_array.copy()
         out_array[out_array > 0] = 1
-        input_grad = np.dot(out_array.T,dwnstrm)
+        input_grad = np.dot(dwnstrm, out_array.T)
         # print("d ", dwnstrm.shape)
         # print("out ", out_array.shape)
         # hand this gradient backward to the layer behind
