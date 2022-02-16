@@ -52,11 +52,11 @@ class Relu:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Relu function, and store it as self.out_array
-        self.out_array = None
+        self.out_array = 
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = None
+        input_grad = 
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
         pass
