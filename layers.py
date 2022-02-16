@@ -59,6 +59,7 @@ class Relu:
         out_array = self.out_array.copy()
         out_array[out_array > 0] = 1
         input_grad = out_array*dwnstrm
+        print(dwnstrm.shape)
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
         pass
