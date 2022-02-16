@@ -8,7 +8,6 @@ class Data:
         self.data = data
         # self.out_dims is the shape of the output of this layer
         self.out_dims = data.shape
-        print(data.shape)
     def set_data(self, data):
         self.data = data
         self.out_dims = data.shape
@@ -73,7 +72,7 @@ class Bias:
         self.in_layer = in_layer
         num_data, num_in_features = in_layer.out_dims
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
-        self.out_dims = np.array([num_data,1])
+        self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
         self.W = np.random.normal(0,1,num_in_features)
     def forward(self):
