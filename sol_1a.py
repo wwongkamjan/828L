@@ -14,9 +14,9 @@ class Network(layers.BaseNetwork):
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
-        self.modules = layers.ModuleList()
-        self.modules.append(self.linear)
-        self.modules.append(self.bias)
+        # self.modules = layers.ModuleList()
+        # self.modules.append(self.linear)
+        # self.modules.append(self.bias)
 
         
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
