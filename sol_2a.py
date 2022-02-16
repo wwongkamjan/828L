@@ -100,7 +100,7 @@ class Trainer:
     def test(self, test_data):
         x, y = test_data
         data_layer = layers.Data(x)
-        self.network.linear.in_layer = data_layer
+        self.network.linear_hidden_1.in_layer = data_layer
         self.loss_layer.labels =  y
 
         modules = self.network.get_modules_with_parameters()
