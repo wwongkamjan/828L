@@ -5,23 +5,27 @@ import data_generators as data
 
 class Network(layers.BaseNetwork):
     #TODO: you might need to pass additional arguments to init for prob 2, 3, 4 and mnist
-    def __init__(self, data_layer, hidden_units):
+    def __init__(self, data_layer, hidden_units, hidden_layers):
         # you should always call __init__ first 
         super().__init__()
         #TODO: define your network architecture here
-        self.linear_hidden_1 = layers.Linear(data_layer,hidden_units) # hidden layer
-        self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
-        self.relu = layers.Relu(self.bias_hidden_1)
-        self.linear = layers.Linear(self.relu,1) # 
-        self.bias = layers.Bias(self.linear)
+        # self.linear_hidden_1 = layers.Linear(data_layer,hidden_units) # hidden layer
+        # self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
+        # self.relu = layers.Relu(self.bias_hidden_1)
 
+        self.modules = layers.ModuleList()
+        layer = data_layer
+        for i in range(hidden_layers):
+            self.modules.append(layers.Linear(layer,hidden_units))
+            layer = self.modules[-1] # hidden layer
+            self.modules.append(layers.Bias(layer))
+            layer = self.modules[-1]
+            self.modules.append(layers.Relu(layer))
+            layer = self.modules[-1]
 
-
-
-        # output_feature = []
-        # for i in range (hidden_layers):
-        #     output_feature.append(hidden_units[i])
-        # output_feature.append(1)
+        self.modules.append(layers.Linear(layer,1)) 
+        layer = self.modules[-1]
+        self.modules.append(layers.Bias(layer))
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
@@ -31,13 +35,9 @@ class Network(layers.BaseNetwork):
         # self.modules.append(self.linear)
         # self.modules.append(self.bias)
 
-        # bias_layer = self.linear
-        # linear_layer = self.bias
-        # for i in range (hidden_layers):
-        #     self.modules.append(layers.Linear(self.linear,1))
                 
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
-        self.set_output_layer(self.bias)
+        self.set_output_layer(self.modules[-1])
 
 class Trainer:
     def __init__(self):
@@ -52,9 +52,9 @@ class Trainer:
         Note: You are not required to use define_network in setup function below, although you are welcome to.
         '''
         hidden_units = parameters["hidden_units"] #needed for prob 2, 3, 4, mnist
-        # hidden_layers = parameters["hidden_layers"] #needed for prob 3, 4, mnist
+        hidden_layers = parameters["hidden_layers"] #needed for prob 3, 4, mnist
         #TODO: construct your network here
-        network = Network(data_layer, hidden_units)
+        network = Network(data_layer, hidden_units, hidden_layers)
         return network
     
     def setup(self, training_data):
@@ -62,7 +62,7 @@ class Trainer:
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
         #TODO: construct the network. you don't have to use define_network.
-        self.network = self.define_network(self.data_layer,{"hidden_units": 10})
+        self.network = self.define_network(self.data_layer,{"hidden_units": 10, "hidden_layers":3})
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.SquareLoss(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
@@ -121,7 +121,7 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        data_dict = data.data_2b()
+        data_dict = data.data_3a()
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
