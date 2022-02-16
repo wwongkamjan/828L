@@ -84,7 +84,7 @@ class Bias:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
-        self.out_array = self.in_array + self.W
+        self.out_array = self.in_array + [self.W]*self.in_array.shape[0]
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
