@@ -106,11 +106,11 @@ class SquareLoss:
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of mean squared error, and store it as self.out_array
         self.out_array = ((1/(2*self.num_data))*np.abs(self.in_array - self.labels)**2).sum()
-        print(self.out_array.shape)
         return self.out_array
     def backward(self):
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
+        print(self.in_array.shape)
         self.pass_back = (self.in_array - self.labels) #*(1/self.num_data)
         # print(self.pass_back)
         # hand this gradient backward to the layer behind
