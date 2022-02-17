@@ -204,7 +204,7 @@ class SGDSolver:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
             # print("W ", m.W.shape)
             # print("G ", m.G.shape)
-            m.W += self.lr*m.G
+            m.W -= self.lr*m.G
             
 
 def is_modules_with_parameters(value):
