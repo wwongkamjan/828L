@@ -83,12 +83,12 @@ class Bias:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
         self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.zeros((num_in_features,1))
+        self.W = np.zeros((1,num_in_features))
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
         
-        b = np.repeat(self.W.T, self.in_layer.out_dims[0], axis=0)
+        b = np.repeat(self.W, self.in_layer.out_dims[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
         # print("in", self.in_array.shape)
@@ -99,7 +99,7 @@ class Bias:
         _, num_in_features = self.in_layer.out_dims
         # print(np.mean(dwnstrm, axis=0))
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.reshape(np.sum(dwnstrm, axis=0), (num_in_features,1))
+        self.G = np.reshape(np.sum(dwnstrm, axis=0), (1,num_in_features))
         # print(self.G.shape)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
