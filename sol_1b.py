@@ -9,8 +9,10 @@ class Network(layers.BaseNetwork):
         # you should always call __init__ first 
         super().__init__()
         #TODO: define your network architecture here
-        self.linear = layers.Linear(data_layer,1)
-        self.bias = layers.Bias(self.linear)
+        # self.linear = layers.Linear(data_layer,1)
+        # self.bias = layers.Bias(self.linear)
+        self.bias = layers.Bias(data_layer)
+        self.linear = layers.Linear(self.bias,1)
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
@@ -20,7 +22,7 @@ class Network(layers.BaseNetwork):
 
         
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
-        self.set_output_layer(self.bias)
+        self.set_output_layer(self.linear)
 
 class Trainer:
     def __init__(self):
