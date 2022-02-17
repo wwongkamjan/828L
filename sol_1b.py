@@ -43,7 +43,7 @@ class Trainer:
     def setup(self, training_data):
         x, y = training_data
         #TODO: define input data layer
-        self.data_layer = layers.Data(x.T)
+        self.data_layer = layers.Data(x)
         #TODO: construct the network. you don't have to use define_network.
         self.network = self.define_network(self.data_layer)
         #TODO: use the appropriate loss function here
