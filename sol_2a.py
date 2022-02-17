@@ -10,8 +10,8 @@ class Network(layers.BaseNetwork):
         super().__init__()
         #TODO: define your network architecture here
         self.linear_hidden_1 = layers.Linear(data_layer,hidden_units) # hidden layer
-        # self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
-        self.relu = layers.Relu(self.linear_hidden_1)
+        self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
+        self.relu = layers.Relu(self.bias_hidden_1)
         self.linear = layers.Linear(self.relu,1) # 
         self.bias = layers.Bias(self.linear)
 
