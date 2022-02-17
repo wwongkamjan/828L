@@ -33,6 +33,7 @@ class Linear:
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
         self.out_array = np.dot(self.in_array, self.W.T) #self.in_array *self.W 
         # self.out_array = np.dot(self.W, self.in_array) #self.in_array *self.W 
+        print("Linear in:", self.in_array.shape)
         # print(self.in_layer.out_dims)
         # print(self.W.shape)
         # print("linear", self.out_array.shape)
@@ -62,13 +63,15 @@ class Relu:
         # TODO: Compute the result of Relu function, and store it as self.out_array
         self.out_array =self.in_array.copy()
         self.out_array[self.out_array <0] = 0
+
+        print("Relu in:", self.in_array.shape)
         # print("relu", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm.copy()
         input_grad[input_grad < 0] = 0
-        input_grad[input_grad > 0] = 1
+        input_grad[input_grad > 0] = 1.
         # print("d ", dwnstrm.shape)
         # print("out ", out_array.shape)
         # hand this gradient backward to the layer behind
@@ -92,7 +95,7 @@ class Bias:
         b = np.repeat(self.W, self.in_layer.out_dims[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
-        # print("in", self.in_array.shape)
+        print("in Bias", self.in_array.shape)
         # print("bias", self.W.shape)
         # print("bias", self.out_array.shape)
         return self.out_array
@@ -123,6 +126,7 @@ class SquareLoss:
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of mean squared error, and store it as self.out_array
         self.out_array = ((1/(2*self.num_data))*np.square(self.in_array - self.labels)).sum()
+        print("in Loss", self.in_array.shape)
         # print("loss", self.out_array.shape)
         return self.out_array
     def backward(self):
