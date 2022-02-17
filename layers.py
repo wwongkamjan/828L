@@ -88,12 +88,12 @@ class Bias:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
-        
+        #repeat for every sample
         b = np.repeat(self.W, self.in_layer.out_dims[0], axis=0)
-        print("new bias", b)
-        self.out_array = self.in_array + self.W
-        print("in", self.in_array.shape)
-        print("bias", self.W.shape)
+        # print("new bias", b)
+        self.out_array = self.in_array + b
+        # print("in", self.in_array.shape)
+        # print("bias", self.W.shape)
         # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
@@ -204,7 +204,7 @@ class SGDSolver:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
             # print("W ", m.W.shape)
             # print("G ", m.G.shape)
-            m.W -= self.lr*m.G
+            m.W += self.lr*m.G
             
 
 def is_modules_with_parameters(value):
