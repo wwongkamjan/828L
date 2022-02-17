@@ -66,7 +66,7 @@ class Relu:
     def backward(self, dwnstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm.copy()
-        input_grad[input_grad < 0] = 0
+        # input_grad[input_grad < 0] = 0
         input_grad[input_grad > 0] = 1
         # print("d ", dwnstrm.shape)
         # print("out ", out_array.shape)
