@@ -26,25 +26,25 @@ class Linear:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array e.g. self.out_dims = np.array([x, y])
         self.out_dims = np.array([num_data,num_out_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.rand(num_out_features,num_in_features)
+        self.W = np.random.rand(num_in_features,num_out_features)
     def forward(self):
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
-        self.out_array = np.dot(self.in_array, self.W.T) #self.in_array *self.W 
+        self.out_array = np.dot(self.in_array, self.W) #self.in_array *self.W 
         # print(self.in_layer.out_dims)
         # print(self.W.shape)
         # print("linear", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.dot(dwnstrm.T,self.in_array)
+        self.G = np.dot(self.in_array, dwnstrm)
         # print(self.G.shape)
         # print("in",self.in_array.shape)
         # print(dwnstrm.shape)
         
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = np.dot(dwnstrm, self.W) # dwnstrm*self.W
+        input_grad = np.dot(self.W,dwnstrm) # dwnstrm*self.W
         # hand this gradient backward to the layer behind
         self.in_layer.backward(input_grad)
 
@@ -83,12 +83,12 @@ class Bias:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
         self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.rand(1,num_in_features)
+        self.W = np.random.rand(num_in_features,1)
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
         
-        b = np.repeat(self.W, self.in_layer.out_dims[0], axis=0)
+        b = np.repeat(self.W.T, self.in_layer.out_dims[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
         # print("in", self.in_array.shape)
