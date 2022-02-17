@@ -9,10 +9,8 @@ class Network(layers.BaseNetwork):
         # you should always call __init__ first 
         super().__init__()
         #TODO: define your network architecture here
-        # self.linear = layers.Linear(data_layer,1)
-        # self.bias = layers.Bias(self.linear)
-        self.bias = layers.Bias(data_layer)
-        self.linear = layers.Linear(self.bias,1)
+        self.linear = layers.Linear(data_layer,1)
+        self.bias = layers.Bias(self.linear)
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
@@ -22,7 +20,7 @@ class Network(layers.BaseNetwork):
 
         
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
-        self.set_output_layer(self.linear)
+        self.set_output_layer(self.bias)
 
 class Trainer:
     def __init__(self):
@@ -51,7 +49,7 @@ class Trainer:
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.SquareLoss(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(0.1, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
