@@ -119,6 +119,7 @@ class SquareLoss:
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of mean squared error, and store it as self.out_array
         self.out_array = ((1/(2*self.num_data))*np.square(self.in_array - self.labels)).sum()
+        print(self.out_array)
         return self.out_array
     def backward(self):
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
@@ -195,8 +196,8 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            print("W ", m.W.shape)
-            print("G ", m.G.shape)
+            # print("W ", m.W.shape)
+            # print("G ", m.G.shape)
             m.W -= self.lr*m.G
             
 
