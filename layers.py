@@ -66,6 +66,7 @@ class Relu:
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
         input_grad[input_grad < 0] = 0
+        input_grad[input_grad > 0] = 1
         # print("d ", dwnstrm.shape)
         # print("out ", out_array.shape)
         # hand this gradient backward to the layer behind
@@ -93,8 +94,9 @@ class Bias:
         # print("bias", self.W.shape)
         return self.out_array
     def backward(self, dwnstrm):
+        _, num_in_features = self.in_layer.out_dims
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = dwnstrm
+        self.G = np.reshape(np.mean(dwnstrm, axis=0), (1,num_in_features))
         # print(self.G.shape)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
@@ -125,6 +127,7 @@ class SquareLoss:
         self.pass_back = (self.in_array - self.labels)*(1/self.num_data)
         # print("cost shape", self.pass_back.shape)
         # hand this gradient backward to the layer behind
+
         self.in_layer.backward(self.pass_back) 
         pass
     pass
@@ -192,7 +195,7 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            m.W -= self.lr*np.mean(m.G, axis=0)
+            m.W -= self.lr*m.G
 
 def is_modules_with_parameters(value):
     return isinstance(value, Linear) or isinstance(value, Bias)
