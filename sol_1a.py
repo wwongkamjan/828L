@@ -23,7 +23,7 @@ class Network(layers.BaseNetwork):
 
         
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
-        self.set_output_layer(self.bias)
+        self.set_output_layer(self.linear)
 
 class Trainer:
     def __init__(self):
