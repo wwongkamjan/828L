@@ -15,10 +15,6 @@ class Network(layers.BaseNetwork):
         self.linear = layers.Linear(self.relu,1) # 
         self.bias = layers.Bias(self.linear)
 
-        # output_feature = []
-        # for i in range (hidden_layers):
-        #     output_feature.append(hidden_units[i])
-        # output_feature.append(1)
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
@@ -28,10 +24,6 @@ class Network(layers.BaseNetwork):
         # self.modules.append(self.linear)
         # self.modules.append(self.bias)
 
-        # bias_layer = self.linear
-        # linear_layer = self.bias
-        # for i in range (hidden_layers):
-        #     self.modules.append(layers.Linear(self.linear,1))
                 
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
         self.set_output_layer(self.bias)

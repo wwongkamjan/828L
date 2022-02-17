@@ -26,7 +26,7 @@ class Linear:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array e.g. self.out_dims = np.array([x, y])
         self.out_dims = np.array([num_data,num_out_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.rand(num_in_features,num_out_features)
+        self.W = np.random.rand(num_in_features,num_out_features) * 0.01
     def forward(self):
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
@@ -83,7 +83,7 @@ class Bias:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array.
         self.out_dims = np.array([num_data,num_in_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.rand(num_in_features,1)
+        self.W = np.random.zeros((num_in_features,1))
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
@@ -99,7 +99,7 @@ class Bias:
         _, num_in_features = self.in_layer.out_dims
         # print(np.mean(dwnstrm, axis=0))
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.reshape(np.mean(dwnstrm, axis=0), (num_in_features,1))
+        self.G = np.reshape(np.sum(dwnstrm, axis=0), (num_in_features,1))
         # print(self.G.shape)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
