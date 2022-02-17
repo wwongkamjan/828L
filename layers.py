@@ -59,7 +59,7 @@ class Relu:
     def forward(self):
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Relu function, and store it as self.out_array
-        self.out_array =self.in_array
+        self.out_array =self.in_array.copy()
         self.out_array[self.out_array <0] = 0
         # print("relu", self.out_array.shape)
         return self.out_array
