@@ -93,7 +93,7 @@ class Bias:
         self.out_array = self.in_array + b
         # print("in", self.in_array.shape)
         # print("bias", self.W.shape)
-        print("bias", self.out_array.shape)
+        # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         _, num_in_features = self.in_layer.out_dims
@@ -199,8 +199,8 @@ class SGDSolver:
     def step(self):
         for m in self.modules:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
-            # print("W ", m.W.shape)
-            # print("G ", m.G.shape)
+            print("W ", m.W.shape)
+            print("G ", m.G.shape)
             m.W -= self.lr*m.G
             
 
