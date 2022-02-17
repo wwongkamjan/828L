@@ -105,9 +105,7 @@ class Trainer:
         self.network.linear_hidden_1.in_layer = data_layer
         self.loss_layer.labels =  y
 
-        modules = self.network.get_modules_with_parameters()
-        for i in range(len(modules)):
-            predict = modules[i].forward()
+        predict = self.network.get_output_layer().forward()
         error = 0
         for i in range(len(predict)):
             error += predict[i] - y[i]
