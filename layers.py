@@ -34,7 +34,7 @@ class Linear:
         self.out_array = np.dot(self.in_array, self.W) #self.in_array *self.W 
         # print(self.in_layer.out_dims)
         # print(self.W.shape)
-        print("linear", self.out_array.shape)
+        # print("linear", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
@@ -93,7 +93,7 @@ class Bias:
         self.out_array = self.in_array + b
         # print("in", self.in_array.shape)
         # print("bias", self.W.shape)
-        print("bias", self.out_array.shape)
+        # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         _, num_in_features = self.in_layer.out_dims
