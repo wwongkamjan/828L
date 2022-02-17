@@ -32,13 +32,14 @@ class Linear:
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of linear layer with weight W, and store it as self.out_array
         self.out_array = np.dot(self.in_array, self.W.T) #self.in_array *self.W 
+        # self.out_array = np.dot(self.W, self.in_array) #self.in_array *self.W 
         # print(self.in_layer.out_dims)
         # print(self.W.shape)
         # print("linear", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.dot(dwnstrm.T, self.in_array)
+        self.G = np.outer(dwnstrm.T, self.in_array)
         # print(self.G.shape)
         # print("in",self.in_array.shape)
         # print(dwnstrm.shape)
@@ -128,7 +129,7 @@ class SquareLoss:
         """Gradient is (1/M) (X-Y), where N is the number of training samples"""
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         # print((self.in_array - self.labels).shape)
-        self.pass_back = (self.in_array - self.labels)*(1/self.num_data)
+        self.pass_back = (self.in_array - self.labels)/self.num_data
         # print("cost shape", self.pass_back.shape)
         # hand this gradient backward to the layer behind
 
