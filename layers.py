@@ -26,7 +26,7 @@ class Linear:
         # TODO: Set out_dims to the shape of the output of this linear layer as a numpy array e.g. self.out_dims = np.array([x, y])
         self.out_dims = np.array([num_data,num_out_features])
         # TODO: Declare the weight matrix. Be careful how you initialize the matrix.
-        self.W = np.random.rand(num_in_features,num_out_features) * 0.01
+        self.W = np.random.randn(num_out_features,num_in_features) * np.sqrt(1. / num_out_features)
     def forward(self):
         """This function computes XW"""
         self.in_array = self.in_layer.forward()
