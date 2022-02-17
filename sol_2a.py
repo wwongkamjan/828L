@@ -9,11 +9,16 @@ class Network(layers.BaseNetwork):
         # you should always call __init__ first 
         super().__init__()
         #TODO: define your network architecture here
-        self.linear_hidden_1 = layers.Linear(data_layer,hidden_units) # hidden layer
-        self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
-        self.relu = layers.Relu(self.bias_hidden_1)
-        self.linear = layers.Linear(self.relu,1) # 
-        self.bias = layers.Bias(self.linear)
+        # self.linear_hidden_1 = layers.Linear(data_layer,hidden_units) # hidden layer
+        # self.bias_hidden_1 = layers.Bias(self.linear_hidden_1)
+        # self.relu = layers.Relu(self.bias_hidden_1)
+        # self.linear = layers.Linear(self.relu,1) # 
+        # self.bias = layers.Bias(self.linear)
+        self.bias_hidden_1 = layers.Bias(data_layer)
+        self.linear_hidden_1 = layers.Linear(self.bias_hidden_1,hidden_units) # hidden layer
+        self.relu = layers.Relu(self.linear_hidden_1)
+        self.bias = layers.Bias(self.relu)
+        self.linear = layers.Linear(self.bias,1) # 
 
 
 
@@ -37,7 +42,7 @@ class Network(layers.BaseNetwork):
         #     self.modules.append(layers.Linear(self.linear,1))
                 
         #TODO: always call self.set_output_layer with the output layer of this network (usually the last layer)
-        self.set_output_layer(self.bias)
+        self.set_output_layer(self.linear)
 
 class Trainer:
     def __init__(self):
