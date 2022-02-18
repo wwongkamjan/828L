@@ -154,7 +154,7 @@ class Sigmoid:
         in_array = np.minimum(in_array, 709)
         in_array = np.maximum(in_array, -709)
         self.out_array = np.exp(in_array)/((1+np.exp(-1*in_array))*np.exp(in_array))
-        print(self.out_array.shape)
+        # print(self.out_array.shape)
         return self.out_array
     def backward(self, dwmstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
