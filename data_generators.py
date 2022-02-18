@@ -180,6 +180,25 @@ def data_4b():
         "test": (x_test, y_test)
     }
 
+def data_4b_1():
+    #generating data
+    x1_all = np.linspace(-2, 2, 120)
+    x2_all = np.linspace(-2, 2, 120)
+    x1_train = x1_all[::2]
+    x2_train = x1_all[::2]
+    x_train = np.array(np.meshgrid(x1_train,x2_train)).transpose().reshape(-1, 2)
+    A = np.array([[2, -3]])
+    y_train = np.where(np.einsum("ij,...j->...i", A, x_train) > 0, 1, 0)
+    #gen test data
+    x1_test = x1_all[1::2]
+    x2_test = x2_all[1::2]
+    x_test = np.array(np.meshgrid(x1_test,x2_test)).transpose().reshape(-1, 2)
+    y_test = np.where(np.einsum("ij,...j->...i", A, x_test) > 0, 1, 0)
+    return {
+        "train": (x_train, y_train),
+        "test": (x_test, y_test)
+    }
+
 
 def generate_default_data(module_name):
     func_name = module_name.replace("sol_", "data_")
