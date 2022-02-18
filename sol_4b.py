@@ -18,7 +18,7 @@ class Network(layers.BaseNetwork):
         for i in range(hidden_layers):
             self.modules.append(layers.Linear(self.modules[-1],hidden_units))
             self.modules.append(layers.Bias(self.modules[-1]))
-            self.modules.append(layers.Relu(self.modules[-1]))
+            self.modules.append(layers.Sigmoid(self.modules[-1]))
 
         self.modules.append(layers.Linear(self.modules[-1],1)) 
         self.modules.append(layers.Bias(self.modules[-1]))
