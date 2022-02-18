@@ -85,7 +85,7 @@ class Trainer:
         for i in range (num_iter):
             train_losses.append(self.train_step())
         # you have to return train_losses for the function
-        print(train_losses[-1])
+        # print(train_losses[-1])
         return train_losses
 
     def test(self, test_data):
