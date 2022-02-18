@@ -171,7 +171,7 @@ class CrossEntropy:
         self.in_array = self.in_layer.forward()
         self.num_data =self.in_array.shape[0]
        # TODO: Compute the result of cross entropy loss, and store it as self.out_array
-        self.out_array =  (1/self.num_data)*(np.sum(self.labels*np.log(self.in_array) + (1-self.labels)*np.log(1- self.in_array)))
+        self.out_array =  -1*(np.sum(self.labels*np.log(self.in_array) + (1-self.labels)*np.log(1- self.in_array)))
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind
