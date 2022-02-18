@@ -86,7 +86,7 @@ class Trainer:
     def train(self, num_iter):
         train_losses = []
         #TODO: train the network for num_iter iterations. You should append the loss of each iteration to train_losses.
-        e = 0.05
+        e = 0.025
         for i in range (num_iter):
             train_losses.append(self.train_step())
             if train_losses[-1] < e:
