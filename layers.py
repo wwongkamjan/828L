@@ -174,7 +174,10 @@ class CrossEntropy:
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind
-        input_grad = (self.out_array - self.labels)/((self.out_array)*(1 -self.out_array))
+        div = (self.out_array)*(1 -self.out_array)
+        if div==0:
+            div = 1
+        input_grad = (self.out_array - self.labels)/(div)
         self.in_layer.backward(input_grad)
 
 class CrossEntropySoftMax:
