@@ -70,11 +70,6 @@ class Trainer:
         # you have to return loss for the function 
 
         #forward pass - from input layer - to loss layer
-        modules = self.network.get_modules_with_parameters()
-        for i in range(len(modules)):
-            modules[i].forward()
-
-        #get loss
         loss = self.loss_layer.forward()
         self.loss_layer.backward()
         self.optim.step()
