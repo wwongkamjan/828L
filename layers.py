@@ -74,7 +74,7 @@ class Relu:
 
         
         # input_grad[input_grad < 0] = 0
-        # input_grad[input_grad > 0] = 1.
+        input_grad[input_grad > 0] = 1.
         # print("d ", dwnstrm.shape)
         # print("out ", out_array.shape)
         # hand this gradient backward to the layer behind
