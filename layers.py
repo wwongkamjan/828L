@@ -106,7 +106,7 @@ class Bias:
         _, num_in_features = self.in_layer.out_dims
         # print(np.mean(dwnstrm, axis=0))
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.reshape(np.sum(dwnstrm, axis=0), (1,num_in_features))
+        self.G = np.reshape(np.mean(dwnstrm, axis=0), (1,num_in_features))
         # print(self.G.shape)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
