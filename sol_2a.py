@@ -82,8 +82,8 @@ class Trainer:
         #TODO: train the network for num_iter iterations. You should append the loss of each iteration to train_losses.
         for i in range (num_iter):
             train_losses.append(self.train_step())
-            if i%1000==0:
-                print(train_losses[-1])
+            # if i%1000==0:
+            #     print(train_losses[-1])
         # you have to return train_losses for the function
         print(train_losses[-1])
         return train_losses
