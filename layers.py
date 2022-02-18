@@ -156,7 +156,7 @@ class Sigmoid:
         return self.out_array
     def backward(self, dwmstrm):
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        input_grad = np.dot(dwmstrm, self.out_array * (1- self.out_array))
+        input_grad = dwmstrm*self.out_array * (1- self.out_array)
         self.in_layer.backward(input_grad)
 
 class CrossEntropy:
