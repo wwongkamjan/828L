@@ -91,6 +91,7 @@ class Trainer:
     def test(self, test_data):
         x, y = test_data
         data_layer = layers.Data(x)
+        print(self.network.modules)
         self.network.modules[1].in_layer = data_layer
         self.loss_layer.labels =  y
 
