@@ -95,6 +95,7 @@ class Trainer:
         self.loss_layer.labels =  y
 
         predict = self.network.get_output_layer().forward()
+        predict = np.where(predict > 0.5, 1, 0)
         correct = 0
         for i in range(len(predict)):
             print("predict: ",predict[i] ," label: ",y[i] )
