@@ -133,6 +133,33 @@ def data_4a():
         "test": (x_test, y_test)
     }
 
+def data_4a_1():
+    #generating data
+    x = np.linspace(-2, 2, 60)[:, np.newaxis]
+    y = np.where(x > 1, 1, 0)
+    x_train = x[::2]
+    y_train = y[::2]
+
+    x_test = x[1::2]
+    y_test = y[1::2]
+    return {
+        "train": (x_train, y_train),
+        "test": (x_test, y_test)
+    }
+def data_4a_2():
+    #generating data
+    x = np.linspace(-2, 2, 30)[:, np.newaxis]
+    y = np.where(x > 0, 1, 0)
+    y[25:,:] = 0
+    x_train = x[::2]
+    y_train = y[::2]
+
+    x_test = x[1::2]
+    y_test = y[1::2]
+    return {
+        "train": (x_train, y_train),
+        "test": (x_test, y_test)
+    }
 
 def data_4b():
     #generating data
