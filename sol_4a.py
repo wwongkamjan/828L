@@ -97,6 +97,7 @@ class Trainer:
         predict = self.network.get_output_layer().forward()
         correct = 0
         for i in range(len(predict)):
+            print("predict: ",predict[i] ," label: ",y[i] )
             if predict[i] ==y[i]:
                 correct +=1
         return correct/len(predict)
