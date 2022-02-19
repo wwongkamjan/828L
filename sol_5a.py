@@ -113,6 +113,8 @@ def main(test=False):
     if not test:
         # Your code goes here.
         data_dict = data.data_4a_1()
+        bz = 256
+        
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
