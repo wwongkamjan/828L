@@ -2,6 +2,7 @@ import layers
 import numpy as np
 import matplotlib.pyplot as plt
 import data_generators as data
+import pickle
 
 class Network(layers.BaseNetwork):
     #TODO: you might need to pass additional arguments to init for prob 2, 3, 4 and mnist
@@ -60,12 +61,12 @@ class Trainer:
         #TODO: construct the network. you don't have to use define_network.
         self.network = self.define_network(self.data_layer,{"hidden_units": 10, "hidden_layers":3})
         #TODO: use the appropriate loss function here
-        self.loss_layer = layers.CrossEntropy(self.network.output_layer, y)
+        self.loss_layer = layers.CrossEntropySoftMax(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
         self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
-    def train_step(self):
+    def train_step(self, bz):
         # TODO: train the network for a single iteration
         # you have to return loss for the function 
 
@@ -112,14 +113,28 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        data_dict = data.data_4a_1()
-        bz = 256
-        
-        train_data = data_dict['train']
+        with open('mnist.pkl', 'rb') as f:
+            train_set, valid_set, test_set = pickle.load(f)
+
+        print(train_set.shape)
+
+        batch_size = 256
+        num_round = int(np.ceil(train_set.shape[0]/batch_size))
+        ind = 0
+        for j in range (num_round):
+            last_ind = min(ind+batch_size, train_set.shape[0]-1)
+            train_data = train_set[ind:ind+last_ind]
+            if ind==0:
+                trainer.setup(train_data)
+            else:
+                x,y = train_data
+                trainer.data_layer = layers.Data(x)
+                trainer.loss_layer.set_data(y)
+            trainer.train(10000)
+            ind+=256
         # print(train_data.shape)
-        test_data = data_dict['test']
-        trainer.setup(train_data)
-        trainer.train(30000)
+        test_data = test_set
+
         print(trainer.test(test_data))
 
     else:
