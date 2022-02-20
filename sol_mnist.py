@@ -129,11 +129,11 @@ def main(test=False):
             else:
                 x,y = train_data
                 trainer.data_layer = layers.Data(x)
-                print("x", x.shape)
-                print("y", y.shape)
+                # print("x", x.shape)
+                # print("y", y.shape)
                 trainer.network.modules[1].in_layer = trainer.data_layer
                 trainer.loss_layer.set_data(y)
-            trainer.train(100)
+            trainer.train(1000)
             ind+=batch_size
         # print(train_data.shape)
         test_data = (test_x,test_y)
