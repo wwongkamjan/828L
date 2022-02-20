@@ -219,7 +219,7 @@ class SGDSolver:
             # print("G ", m.G.shape)
             new_W = m.G.copy()
             if m.W.shape != m.G.shape:
-                np.reshape(np.sum(new_W, axis=0), (1,m.G.shape[1]))
+                new_W = np.reshape(np.sum(new_W, axis=0), (1,m.G.shape[1]))
             m.W -= self.lr*new_W
             
 
