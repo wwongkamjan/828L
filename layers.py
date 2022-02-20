@@ -71,8 +71,7 @@ class Relu:
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = self.out_array.copy()
         input_grad[input_grad > 0] = 1.
-        d = np.repeat(dwnstrm, self.in_dims[0], axis=0)
-        input_grad = input_grad * d
+        input_grad = input_grad * dwnstrm
 
         # input_grad[input_grad < 0] = 0
         
