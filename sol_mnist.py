@@ -92,16 +92,12 @@ class Trainer:
     def test(self, test_data):
         x, y = test_data
         self.data_layer = layers.Data(x)
-        # self.network.modules[1].in_layer = data_layer
-        self.loss_layer.set_data(y)
 
         predict = self.network.forward()
-        predict = np.where(predict > 0.5, 1, 0)
         correct = 0
         for i in range(len(predict)):
-            print("predict: ",predict[i] ," label: ",y[i] )
-            if predict[i] ==y[i]:
-                correct +=1
+            if np.argmax(predict[i]) == np.argmax(y[i]):
+                correct+=1
         return correct/len(predict)
     
 #DO NOT CHANGE THE NAME OF THIS FUNCTION
@@ -134,7 +130,7 @@ def main(test=False):
                 x,y = train_data
                 trainer.data_layer = layers.Data(x)
                 trainer.loss_layer.set_data(y)
-            trainer.train(10000)
+            trainer.train(1000)
             ind+=256
         # print(train_data.shape)
         test_data = (test_x,test_y)
