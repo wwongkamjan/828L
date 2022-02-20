@@ -116,7 +116,7 @@ def main(test=False):
         with open('mnist.pkl', 'rb') as f:
             mnist_data = pickle.load(f)
 
-        print(mnist_data.shape)
+        print(mnist_data)
 
         batch_size = 256
         num_round = int(np.ceil(train_set.shape[0]/batch_size))
