@@ -199,10 +199,13 @@ class CrossEntropySoftMax:
         self.in_array = self.in_layer.forward()
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of softmax + cross entropy, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        in_array = np.maximum(self.in_array, 709)
+        in_array = np.minimum(in_array, 709)
+        in_array = np.maximum(in_array, -709)
         sum_prob = np.sum(np.exp(in_array), axis=1)
         d = [[x]*self.ones_hot.shape[1] for x in sum_prob]
         self.activation = np.exp(in_array)/d
+        print( self.activation.shape)
+        print(self.ones_hot.shape)
         self.out_array= (-np.sum(self.ones_hot * np.log(self.activation)))/self.num_data
         return self.out_array
     def backward(self):
