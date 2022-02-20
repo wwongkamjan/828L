@@ -129,6 +129,8 @@ def main(test=False):
             else:
                 x,y = train_data
                 trainer.data_layer = layers.Data(x)
+                print("x", x.shape)
+                print("y", y.shape)
                 trainer.loss_layer.set_data(y)
             trainer.train(100)
             ind+=batch_size
