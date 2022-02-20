@@ -131,7 +131,7 @@ def main(test=False):
                 trainer.data_layer = layers.Data(x)
                 trainer.loss_layer.set_data(y)
             trainer.train(100)
-            ind+=256
+            ind+=batch_size
         # print(train_data.shape)
         test_data = (test_x,test_y)
 

@@ -205,8 +205,8 @@ class CrossEntropySoftMax:
         sum_prob = np.sum(np.exp(in_array), axis=1)
         d = [[x]*self.ones_hot.shape[1] for x in sum_prob]
         self.activation = np.exp(in_array)/d
-        # print( self.activation.shape)
-        # print(self.ones_hot.shape)
+        print( "activation ", self.activation.shape)
+        print("one-hot label ",self.ones_hot.shape)
         self.out_array= (-np.sum(self.ones_hot * np.log(self.activation)))/self.num_data
         return self.out_array
     def backward(self):
