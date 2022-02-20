@@ -123,7 +123,7 @@ def main(test=False):
         ind = 0
         for j in range (num_round):
             last_ind = min(ind+batch_size, train_x.shape[0]-1)
-            train_data = (train_x[ind:ind+last_ind], train_y[ind:ind+last_ind])
+            train_data = (train_x[ind:last_ind], train_y[ind:last_ind])
             if ind==0:
                 trainer.setup(train_data)
             else:
