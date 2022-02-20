@@ -66,7 +66,7 @@ class Trainer:
         self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
-    def train_step(self, bz):
+    def train_step(self):
         # TODO: train the network for a single iteration
         # you have to return loss for the function 
 
