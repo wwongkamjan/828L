@@ -200,12 +200,12 @@ class CrossEntropySoftMax:
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of softmax + cross entropy, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
         in_array = np.maximum(self.in_array, 709)
-        aL = np.exp(in_array)/np.sum(np.exp(in_array), axis=1)
-        self.out_array= (1/self.num_data)*(np.sum(self.labels*np.log(aL) + (1-self.labels)*np.log(1- aL)))
+        self.activation = np.exp(in_array)/np.sum(np.exp(in_array), axis=1)
+        self.out_array= (-np.sum(self.ones_hot * np.log(self.activation)))/self.num_data
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        input_grad = (self.in_array - self.labels)/self.num_data 
+        input_grad = (self.activation - self.ones_hot)/self.num_data 
         self.in_layer.backward(input_grad)
         
 class SGDSolver:

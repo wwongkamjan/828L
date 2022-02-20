@@ -21,9 +21,9 @@ class Network(layers.BaseNetwork):
             self.modules.append(layers.Bias(self.modules[-1]))
             self.modules.append(layers.Relu(self.modules[-1]))
 
-        self.modules.append(layers.Linear(self.modules[-1],1)) 
+        self.modules.append(layers.Linear(self.modules[-1],10)) 
         self.modules.append(layers.Bias(self.modules[-1]))
-        self.modules.append(layers.Sigmoid(self.modules[-1]))
+        # self.modules.append(layers.Sigmoid(self.modules[-1]))
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
         # e.g.:
@@ -91,11 +91,11 @@ class Trainer:
 
     def test(self, test_data):
         x, y = test_data
-        data_layer = layers.Data(x)
-        self.network.modules[1].in_layer = data_layer
-        self.loss_layer.labels =  y
+        self.data_layer = layers.Data(x)
+        # self.network.modules[1].in_layer = data_layer
+        self.loss_layer.set_data(y)
 
-        predict = self.network.get_output_layer().forward()
+        predict = self.network.forward()
         predict = np.where(predict > 0.5, 1, 0)
         correct = 0
         for i in range(len(predict)):
@@ -118,16 +118,16 @@ def main(test=False):
 
         train_x = mnist_data['training_images']
         test_x = mnist_data['test_images']
-        train_y = mnist_data['test_labels']
         train_y = mnist_data['training_labels']
-        print(train_x.shape)
-        print(train_y.shape)
+        test_y = mnist_data['test_labels']
+        # print(train_x.shape) (60000, 784)
+        # print(train_y.shape) (60000,)
         batch_size = 256
-        num_round = int(np.ceil(train_set.shape[0]/batch_size))
+        num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
         for j in range (num_round):
-            last_ind = min(ind+batch_size, train_set.shape[0]-1)
-            train_data = train_set[ind:ind+last_ind]
+            last_ind = min(ind+batch_size, train_x.shape[0]-1)
+            train_data = (train_x[ind:ind+last_ind], train_y[ind:ind+last_ind])
             if ind==0:
                 trainer.setup(train_data)
             else:
@@ -137,7 +137,7 @@ def main(test=False):
             trainer.train(10000)
             ind+=256
         # print(train_data.shape)
-        test_data = test_set
+        test_data = (test_x,test_y)
 
         print(trainer.test(test_data))
 
