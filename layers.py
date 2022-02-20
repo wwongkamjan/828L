@@ -106,7 +106,7 @@ class Bias:
         _, num_in_features = self.in_layer.out_dims
         # print(np.mean(dwnstrm, axis=0))
         # TODO: Compute the gradient of the output with respect to W, and store it as G
-        self.G = np.reshape(np.sum(dwnstrm, axis=0), (1,num_in_features))
+        self.G = dwnstrm #np.reshape(np.sum(dwnstrm, axis=0), (1,num_in_features))
         # print(self.G.shape)
         # TODO: Compute grad of output with respect to inputs, and hand this gradient backward to the layer behind
         input_grad = dwnstrm
@@ -217,7 +217,10 @@ class SGDSolver:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
             # print("W ", m.W.shape)
             # print("G ", m.G.shape)
-            m.W -= self.lr*m.G
+            new_W = m.G.copy()
+            if m.W != m.G.shape:
+                np.reshape(np.sum(new_W, axis=0), (1,m.G.shape[1]))
+            m.W -= self.lr*new_W
             
 
 def is_modules_with_parameters(value):
