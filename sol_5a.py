@@ -114,9 +114,9 @@ def main(test=False):
     if not test:
         # Your code goes here.
         with open('mnist.pkl', 'rb') as f:
-            train_set, valid_set, test_set = pickle.load(f)
+            mnist_data = pickle.load(f)
 
-        print(train_set.shape)
+        print(mnist_data.shape)
 
         batch_size = 256
         num_round = int(np.ceil(train_set.shape[0]/batch_size))
