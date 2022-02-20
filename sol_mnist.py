@@ -122,16 +122,13 @@ def main(test=False):
         num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
         for j in range (num_round):
-            last_ind = min(ind+batch_size, train_x.shape[0]-1)
+            last_ind = min(ind+batch_size, train_x.shape[0])
             train_data = (train_x[ind:last_ind], train_y[ind:last_ind])
             if ind==0:
                 trainer.setup(train_data)
             else:
                 x,y = train_data
-                trainer.data_layer = layers.Data(x)
-                # print("x", x.shape)
-                # print("y", y.shape)
-                trainer.network.modules[1].in_layer = trainer.data_layer
+                trainer.network.modules[1].in_layer = layers.Data(x)
                 trainer.loss_layer.set_data(y)
             trainer.train(1000)
             ind+=batch_size
