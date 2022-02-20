@@ -130,7 +130,7 @@ def main(test=False):
                 x,y = train_data
                 trainer.data_layer = layers.Data(x)
                 trainer.loss_layer.set_data(y)
-            trainer.train(1000)
+            trainer.train(100)
             ind+=256
         # print(train_data.shape)
         test_data = (test_x,test_y)
