@@ -105,6 +105,8 @@ def main(test=False):
         train_data = data_dict['train']
         test_data = data_dict['test']
         trainer.setup(train_data)
+        print(trainer.network.linear.W)
+        print(trainer.network.bias.W)
         trainer.train(10000)
         # trainer.test(test_data)
 
