@@ -131,7 +131,7 @@ def main(test=False):
                 trainer.network.modules[1].in_layer = layers.Data(x)
                 print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
-            trainer.train(1000)
+            trainer.train(100)
             ind+=batch_size
         # print(train_data.shape)
         test_data = (test_x,test_y)
