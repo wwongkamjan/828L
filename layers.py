@@ -103,7 +103,6 @@ class Bias:
         # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
-        _, num_in_features = self.in_layer.out_dims
         # print(np.mean(dwnstrm, axis=0))
         # TODO: Compute the gradient of the output with respect to W, and store it as G
         self.G = dwnstrm #np.reshape(np.sum(dwnstrm, axis=0), (1,num_in_features))

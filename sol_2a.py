@@ -115,7 +115,8 @@ def main(test=False):
         trainer.setup(train_data)
         trainer.train(30000)
         # trainer.test(test_data)
-
+        #print y
+        print(trainer.network.get_output_layer().forward())
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
         out = {
