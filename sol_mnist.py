@@ -97,6 +97,7 @@ class Trainer:
         correct = 0
         for i in range(len(predict)):
             print("predict: ", np.argmax(predict[i]), " label: ", y[i])
+            print(predict[i])
             if np.argmax(predict[i]) == y[i]:
                 correct+=1
         return correct/len(predict)
