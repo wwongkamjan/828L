@@ -217,6 +217,7 @@ class CrossEntropySoftMax:
         # print("one-hot label ",self.ones_hot.shape)
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
+        self.activation = log_exp
         self.out_array= (-np.sum(self.ones_hot * in_array,axis=1)+np.sum(self.ones_hot,axis=1)*log_exp)/self.num_data
         return self.out_array
     def backward(self):
