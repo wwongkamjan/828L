@@ -96,8 +96,8 @@ class Trainer:
         predict = self.network.forward()
         correct = 0
         for i in range(len(predict)):
-            print("predict: ", np.argmax(predict[i]), " label: ", np.argmax(y[i]))
-            if np.argmax(predict[i]) == np.argmax(y[i]):
+            print("predict: ", np.argmax(predict[i]), " label: ", y[i])
+            if np.argmax(predict[i]) == y[i]:
                 correct+=1
         return correct/len(predict)
     
