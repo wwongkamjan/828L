@@ -215,8 +215,8 @@ class CrossEntropySoftMax:
         # print("one-hot label ",self.ones_hot.shape)
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
-        exps = np.exp(in_array) *np.exp(-max_x)/np.exp(-max_x)
-        softmax = -in_array + np.log(exps)
+        exps = np.exp(in_array-max_x)/np.exp(-max_x)
+        softmax = -1*in_array + np.log(np.sum(exps))
         self.activation = softmax
         log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
