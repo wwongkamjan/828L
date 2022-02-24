@@ -96,6 +96,7 @@ class Trainer:
         predict = self.network.forward()
         correct = 0
         for i in range(len(predict)):
+            print("predict: ", np.argmax(predict[i]), " label: ", np.argmax(y[i]))
             if np.argmax(predict[i]) == np.argmax(y[i]):
                 correct+=1
         return correct/len(predict)
@@ -135,9 +136,11 @@ def main(test=False):
                 trainer.loss_layer.set_data(y)
             trainer.train(100)
             ind+=batch_size
+        
         # print(train_data.shape)
+        train_data_test = (train_x[-1000:],train_y[-1000:])
         test_data = (test_x,test_y)
-
+        print(trainer.test(train_data_test))
         print(trainer.test(test_data))
 
     else:
