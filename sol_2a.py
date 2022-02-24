@@ -116,6 +116,8 @@ def main(test=False):
         trainer.train(30000)
         # trainer.test(test_data)
         #print y
+        print("w", trainer.network.linear.W)
+        print("b", trainer.network.bias.W)
         print(trainer.network.get_output_layer().forward())
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.

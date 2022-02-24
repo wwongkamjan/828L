@@ -216,11 +216,13 @@ class CrossEntropySoftMax:
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
         exps = np.exp(in_array-max_x)/np.exp(-max_x)
-        softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        # softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        softmax = exps/np.sum(exps)
         self.activation = softmax
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
+        self.out_array = -in_array + np.log(np.sum(exps))
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
-        self.out_array= np.nan_to_num(self.activation)/self.num_data
+        # self.out_array= np.nan_to_num(self.activation)/self.num_data
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
