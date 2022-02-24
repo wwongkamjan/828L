@@ -218,14 +218,16 @@ class CrossEntropySoftMax:
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
         # exps = np.exp(in_array)
-        exps = np.nan_to_num(np.exp(in_array)*np.exp(-max_x)/np.exp(-max_x))
+        # exps = np.nan_to_num(np.exp(in_array)*np.exp(-max_x)/np.exp(-max_x))
+        exps = np.exp(in_array - max_x)
         # print("exps ",exps)
         # softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
         softmax = exps/np.reshape(np.sum(exps,axis=1), (self.num_data,1))
         self.activation = softmax
         # print( "activation ", self.activation)
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
-        self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        # self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8))
         # self.out_array = -np.log(self.activation)
         # print( "loss ", self.out_array)
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
