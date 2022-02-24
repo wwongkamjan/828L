@@ -97,7 +97,7 @@ class Bias:
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of Bias layer, and store it as self.out_array
         #repeat for every sample
-        b = np.repeat(self.W, self.in_layer.out_dims[0], axis=0)
+        b = np.repeat(self.W, self.array.shape[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
         # print("in Bias", self.in_array.shape)
