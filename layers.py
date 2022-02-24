@@ -201,21 +201,23 @@ class CrossEntropySoftMax:
         self.num_data = self.in_array.shape[0]
         # TODO: Compute the result of softmax + cross entropy, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
         in_array = self.in_array.copy()
-        in_array = np.minimum(in_array, 708)
-        in_array = np.maximum(in_array, -708)
-        max_xi = np.exp(np.reshape(-np.max(in_array, axis=1), (in_array.shape[0],1)))
-        # print(max_xi.shape)
-        sum_prob = np.sum(np.exp(in_array)*max_xi/max_xi, axis=1)
-        print(sum_prob)
-        # sum_prob = np.minimum(sum_prob, 708)
-        # sum_prob = np.maximum(sum_prob, 1)
-        # print(sum_prob.shape)
-        d = [[x]*self.ones_hot.shape[1] for x in sum_prob]
-        # self.activation = np.exp(in_array)/d
-        self.activation = -1*in_array + np.log(d)
+        # in_array = np.minimum(in_array, 708)
+        # in_array = np.maximum(in_array, -708)
+        # max_xi = np.exp(np.reshape(-np.max(in_array, axis=1), (in_array.shape[0],1)))
+        # # print(max_xi.shape)
+        # sum_prob = np.sum(np.exp(in_array)*max_xi/max_xi, axis=1)
+        # print(sum_prob)
+        # # sum_prob = np.minimum(sum_prob, 708)
+        # # sum_prob = np.maximum(sum_prob, 1)
+        # # print(sum_prob.shape)
+        # d = [[x]*self.ones_hot.shape[1] for x in sum_prob]
+        # # self.activation = np.exp(in_array)/d
+        # self.activation = -1*in_array + np.log(d)
         # print( "activation ", self.activation.shape)
         # print("one-hot label ",self.ones_hot.shape)
-        self.out_array= (-np.sum(self.ones_hot * np.log(self.activation)))/self.num_data
+        max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
+        log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
+        self.out_array= (-np.sum(self.ones_hot * in_array,axis=1)+np.sum(self.ones_hot,axis=1)*log_exp)/self.num_data
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
