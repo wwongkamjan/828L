@@ -213,6 +213,7 @@ class CrossEntropySoftMax:
         # self.activation = -1*in_array + np.log(d)
         # print( "activation ", self.activation.shape)
         # print("one-hot label ",self.ones_hot.shape)
+        print(in_array)
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
         exps = np.nan_to_num(np.exp(in_array-max_x)/np.exp(-max_x))
