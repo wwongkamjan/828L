@@ -118,8 +118,8 @@ def main(test=False):
         test_y = mnist_data['test_labels']
         # print(train_x.shape) (60000, 784)
         # print(train_y.shape) (60000,)
-        train_x = train_x[:1000]
-        train_y = train_y[:1000]
+        # train_x = train_x[:1000]
+        # train_y = train_y[:1000]
         batch_size = 256
         num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
@@ -133,7 +133,7 @@ def main(test=False):
                 trainer.network.modules[1].in_layer = layers.Data(x)
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
-            trainer.train(1000)
+            trainer.train(500)
             ind+=batch_size
         # print(train_data.shape)
         test_data = (test_x,test_y)

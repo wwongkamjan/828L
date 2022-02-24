@@ -100,8 +100,8 @@ class Bias:
         b = np.repeat(self.W, self.in_array.shape[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
-        print("in array", self.in_array.shape)
-        print("bias", b.shape)
+        # print("in array", self.in_array.shape)
+        # print("bias", b.shape)
         # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
