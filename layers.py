@@ -203,7 +203,7 @@ class CrossEntropySoftMax:
         in_array = self.in_array.copy()
         in_array = np.minimum(in_array, 708)
         in_array = np.maximum(in_array, -708)
-        sum_prob = np.sum(np.exp(in_array), axis=1)
+        sum_prob = np.sum(np.exp(in_array)*np.exp(np.max(in_array, axis=1))/np.exp(np.max(in_array, axis=1)),axis=1)
         d = [[x]*self.ones_hot.shape[1] for x in sum_prob]
         # self.activation = np.exp(in_array)/d
         self.activation = -1*in_array + np.log(d)
