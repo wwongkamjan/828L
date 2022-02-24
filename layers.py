@@ -216,7 +216,7 @@ class CrossEntropySoftMax:
         print("in ",in_array)
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
-        exps = np.nan_to_num(np.exp(in_array-max_x)/np.exp(-max_x))
+        exps = np.nan_to_num(np.exp(in_array)*np.exp(-max_x)/np.exp(-max_x))
         print("exps ",exps)
         # softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
         softmax = exps/np.sum(exps)
