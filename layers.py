@@ -221,7 +221,7 @@ class CrossEntropySoftMax:
         exps = np.nan_to_num(np.exp(in_array)*np.exp(-max_x)/np.exp(-max_x))
         # print("exps ",exps)
         # softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
-        softmax = exps/np.sum(exps)
+        softmax = exps/np.sum(exps,axis=1)
         self.activation = softmax
         # print( "activation ", self.activation)
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
