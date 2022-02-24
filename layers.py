@@ -155,7 +155,8 @@ class Sigmoid:
         in_array = self.in_array.copy()
         in_array = np.minimum(in_array, 708)
         in_array = np.maximum(in_array, -708)
-        self.out_array = np.exp(in_array)/((1+np.exp(-1*in_array))*np.exp(in_array))
+        self.out_array = 1/(1+np.exp(-1*in_array))
+        self.out_array[in_array < 0] = np.exp(in_array)/((1+np.exp(-1*in_array))*np.exp(in_array))
         # print(self.out_array.shape)
         return self.out_array
     def backward(self, dwmstrm):
