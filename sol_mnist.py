@@ -63,7 +63,7 @@ class Trainer:
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.CrossEntropySoftMax(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.05, self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(0.001, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
@@ -133,7 +133,7 @@ def main(test=False):
                 trainer.network.modules[1].in_layer = layers.Data(x)
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
-            trainer.train(500)
+            trainer.train(100)
             ind+=batch_size
         # print(train_data.shape)
         test_data = (test_x,test_y)
