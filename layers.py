@@ -225,14 +225,15 @@ class CrossEntropySoftMax:
         self.activation = softmax
         print( "activation ", self.activation)
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
-        self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        # self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
+        self.out_array = -np.log(self.activation)
         print( "loss ", self.out_array)
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
         # self.out_array= np.nan_to_num(self.activation)/self.num_data
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        input_grad = (self.activation - self.ones_hot)/self.num_data 
+        input_grad = (self.in_array - self.ones_hot)/self.num_data 
         # grad = self.activation.copy()
         # grad[range(self.num_data),self.labels] -=1
         # input_grad = grad/self.num_data
