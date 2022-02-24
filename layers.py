@@ -100,8 +100,8 @@ class Bias:
         b = np.repeat(self.W, self.array.shape[0], axis=0)
         # print("new bias", b)
         self.out_array = self.in_array + b
-        # print("in Bias", self.in_array.shape)
-        # print("bias", self.W.shape)
+        print("in array", self.in_array.shape)
+        print("bias", b.shape)
         # print("bias", self.out_array.shape)
         return self.out_array
     def backward(self, dwnstrm):
@@ -230,7 +230,7 @@ class SGDSolver:
             # print("G ", m.G.shape)
             new_W = m.G.copy()
             if m.W.shape != m.G.shape:
-                new_W = np.reshape(np.sum(new_W, axis=0), (1,m.G.shape[1]))
+                new_W = np.reshape(np.mean(new_W, axis=0), (1,m.G.shape[1]))
             m.W -= self.lr*new_W
             
 
