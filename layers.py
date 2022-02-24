@@ -233,10 +233,10 @@ class CrossEntropySoftMax:
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        input_grad = (self.in_array - self.ones_hot)/self.num_data 
-        # grad = self.activation.copy()
-        # grad[range(self.num_data),self.labels] -=1
-        # input_grad = grad/self.num_data
+        # input_grad = (self.in_array - self.ones_hot)/self.num_data 
+        grad = self.activation.copy()
+        grad[range(self.num_data),self.labels] -=1
+        input_grad = grad/self.num_data
         self.in_layer.backward(input_grad)
         
 class SGDSolver:
