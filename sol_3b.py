@@ -113,7 +113,7 @@ def main(test=False):
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
-        num_layers = 5
+        num_layers = 10
         trainer.setup(train_data, num_layers)
         loss = trainer.train(10000)
         # print(trainer.test(test_data))
@@ -122,7 +122,7 @@ def main(test=False):
         plt.xlabel('iterations')
         plt.ylabel('loss')
         plt.show()
-        fig.savefig('3b.png')
+        fig.savefig('3b_10.png')
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
         out = {
