@@ -49,7 +49,7 @@ class Trainer:
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.SquareLoss(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(0.01, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
@@ -106,7 +106,7 @@ def main(test=False):
         test_data = data_dict['test']
         trainer.setup(train_data)
 
-        trainer.train(5000)
+        trainer.train(10000)
         print("w", trainer.network.linear.W)
         print("b", trainer.network.bias.W)
         trainer.test(test_data)
