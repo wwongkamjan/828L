@@ -116,11 +116,11 @@ def main(test=False):
         trainer.train(10000)
         # trainer.test(test_data)
         #print y
-        print("w1", trainer.network.linear_hidden_1.W)
-        print("b1", trainer.network.bias_hidden_1.W)
-        print("w2", trainer.network.linear.W)
-        print("b2", trainer.network.bias.W)
-        print(trainer.network.get_output_layer().forward())
+        # print("w1", trainer.network.linear_hidden_1.W)
+        # print("b1", trainer.network.bias_hidden_1.W)
+        # print("w2", trainer.network.linear.W)
+        # print("b2", trainer.network.bias.W)
+
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
         out = {

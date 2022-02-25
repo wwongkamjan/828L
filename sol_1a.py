@@ -107,9 +107,9 @@ def main(test=False):
         trainer.setup(train_data)
 
         trainer.train(10000)
-        print("w", trainer.network.linear.W)
-        print("b", trainer.network.bias.W)
-        trainer.test(test_data)
+        # print("w", trainer.network.linear.W)
+        # print("b", trainer.network.bias.W)
+        # trainer.test(test_data)
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
