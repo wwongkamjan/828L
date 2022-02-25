@@ -53,16 +53,16 @@ class Trainer:
         network = Network(data_layer, hidden_units, hidden_layers)
         return network
     
-    def setup(self, training_data):
+    def setup(self, training_data, num_layers):
         x, y = training_data
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
         #TODO: construct the network. you don't have to use define_network.
-        self.network = self.define_network(self.data_layer,{"hidden_units": 20, "hidden_layers":3})
+        self.network = self.define_network(self.data_layer,{"hidden_units": 20, "hidden_layers":num_layers})
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.SquareLoss(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.07, self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(lr, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
@@ -113,10 +113,15 @@ def main(test=False):
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
-        trainer.setup(train_data)
-        print(trainer.train(30000))
+        num_layers = [5,8,10,20]
+        for i in range (4):
+            trainer.setup(train_data, num_layers[i])
+            loss = trainer.train(30000)
         # print(trainer.test(test_data))
-
+            plt.plot(range(30000), loss, label= "depth: "+num_layers[i])
+        plt.xlabel('iterations')
+        plt.ylabel('loss')
+        plt.show()
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
         out = {
