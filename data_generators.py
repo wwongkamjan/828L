@@ -243,7 +243,7 @@ def data_4b_3():
     x_train = np.array(np.meshgrid(x1_train,x2_train)).transpose().reshape(-1, 2)
     A = np.array([[2, -3]])
     y_train = np.where(np.einsum("ij,...j->...i", A, x_train) > 0, 1, 0)
-    y_train[-15:] = 0
+    y_train[-150:] = 0
     #gen test data
     x1_test = x1_all[1::2]
     x2_test = x2_all[1::2]
