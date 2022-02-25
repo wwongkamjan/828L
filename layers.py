@@ -203,7 +203,7 @@ class CrossEntropySoftMax:
         # TODO: Compute the result of softmax + cross entropy, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
         in_array = self.in_array.copy()
         in_array = np.minimum(in_array, 708)
-        # in_array = np.maximum(in_array, -708)
+        in_array = np.maximum(in_array, -708)
         # max_xi = np.exp(np.reshape(-np.max(in_array, axis=1), (in_array.shape[0],1)))
         # sum_prob = np.sum(np.exp(in_array)*max_xi/max_xi, axis=1)
         # # sum_prob = np.minimum(sum_prob, 708)
@@ -225,8 +225,8 @@ class CrossEntropySoftMax:
         self.activation = softmax
         print( "activation ", self.activation)
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
-        # self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
-        self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8), axis=0)
+        self.out_array = -self.activation[range(self.num_data),self.labels] + np.log(np.sum(np.reshape(np.sum(self.exps,axis=1), (self.num_data,1))))
+        # self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8), axis=0)
         print(np.argmax(self.activation,axis=1))
         # self.out_array = -np.log(self.activation)
         # print( "loss ", self.out_array)
