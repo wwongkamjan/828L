@@ -53,7 +53,7 @@ class Trainer:
         network = Network(data_layer, hidden_units, hidden_layers)
         return network
     
-    def setup(self, training_data, num_layers):
+    def setup(self, training_data)#, num_layers):
         x, y = training_data
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
@@ -114,7 +114,8 @@ def main(test=False):
         # print(train_data.shape)
         test_data = data_dict['test']
         num_layers = 3
-        trainer.setup(train_data, num_layers)
+        trainer.setup(train_data,)
+        # trainer.setup(train_data, num_layers)
         loss = trainer.train(30000)
         # print(trainer.test(test_data))
         # fig = plt.figure()
