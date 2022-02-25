@@ -251,7 +251,7 @@ class SGDSolver:
             # print("G ", m.G.shape)
             G = m.G.copy()
             if m.W.shape != m.G.shape:
-                G = np.reshape(np.mean(new_W, axis=0), (1,m.G.shape[1]))
+                G = np.reshape(np.mean(G, axis=0), (1,m.G.shape[1]))
             m.W -= self.lr*G
             print("W", m.W)
             print("G", G)
