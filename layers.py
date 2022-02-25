@@ -153,8 +153,8 @@ class Sigmoid:
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of sigmoid function, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
         in_array = self.in_array.copy()
-        # in_array = np.minimum(in_array, 708)
-        # in_array = np.maximum(in_array, -708)
+        in_array = np.minimum(in_array, 708)
+        in_array = np.maximum(in_array, -708)
         self.out_array = np.exp(in_array)/((1+np.exp(-1*in_array))*np.exp(in_array))
         # print(self.out_array.shape)
         return self.out_array
@@ -227,6 +227,7 @@ class CrossEntropySoftMax:
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
         # self.out_array = -self.activation[range(self.num_data),self.labels] + np.log(np.sum(np.reshape(np.sum(self.exps,axis=1), (self.num_data,1))))
         self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8), axis=1)
+        print(self.out_array)
         print(np.argmax(self.activation,axis=1))
         # self.out_array = -np.log(self.activation)
         # print( "loss ", self.out_array)
