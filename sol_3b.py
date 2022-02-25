@@ -90,8 +90,7 @@ class Trainer:
 
     def test(self, test_data):
         x, y = test_data
-        data_layer = layers.Data(x)
-        self.network.linear_hidden_1.in_layer = data_layer
+        self.network.modules[1].in_layer = layers.Data(x)
         self.loss_layer.labels =  y
 
         predict = self.network.get_output_layer().forward()
