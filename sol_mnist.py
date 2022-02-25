@@ -21,8 +21,8 @@ class Network(layers.BaseNetwork):
             self.modules.append(layers.Bias(self.modules[-1]))
             self.modules.append(layers.Relu(self.modules[-1]))
 
-        # self.modules.append(layers.Linear(self.modules[-1],10)) 
-        # self.modules.append(layers.Bias(self.modules[-1]))
+        self.modules.append(layers.Linear(self.modules[-1],10)) 
+        self.modules.append(layers.Bias(self.modules[-1]))
         # self.modules.append(layers.Sigmoid(self.modules[-1]))
         # For prob 3 and 4:
         # layers.ModuleList can be used to add arbitrary number of layers to the network
@@ -59,7 +59,7 @@ class Trainer:
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
         #TODO: construct the network. you don't have to use define_network.
-        self.network = self.define_network(self.data_layer,{"hidden_units": [32,32,10], "hidden_layers":3})
+        self.network = self.define_network(self.data_layer,{"hidden_units": [64,32,32], "hidden_layers":3})
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.CrossEntropySoftMax(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
