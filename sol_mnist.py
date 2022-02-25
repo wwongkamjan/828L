@@ -72,9 +72,9 @@ class Trainer:
 
         #forward pass - from input layer - to loss layer
         loss = self.loss_layer.forward()
-        print("done forward")
+        # print("done forward")
         self.loss_layer.backward()
-        print("done backward")
+        # print("done backward")
         self.optim.step()
         # print(loss)
         return loss
@@ -127,7 +127,7 @@ def main(test=False):
         num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
         for j in range (num_round):
-            print("new round of data")
+            # print("new round of data")
             last_ind = min(ind+batch_size, train_x.shape[0])
             train_data = (train_x[ind:last_ind], train_y[ind:last_ind])
             if ind==0:
