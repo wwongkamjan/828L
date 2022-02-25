@@ -114,8 +114,8 @@ def main(test=False):
         # print(train_data.shape)
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(30000)
-        print(trainer.test(test_data))
+        print(trainer.train(30000))
+        # print(trainer.test(test_data))
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
