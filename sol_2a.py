@@ -113,7 +113,7 @@ def main(test=False):
         # print(train_data.shape)
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(30000)
+        trainer.train(10000)
         # trainer.test(test_data)
         #print y
         print("w1", trainer.network.linear_hidden_1.W)
