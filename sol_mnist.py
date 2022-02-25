@@ -132,12 +132,14 @@ def main(test=False):
             train_data = (train_x[ind:last_ind], train_y[ind:last_ind])
             if ind==0:
                 trainer.setup(train_data)
+                
             else:
                 x,y = train_data
                 trainer.network.modules[1].in_layer = layers.Data(x)
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
-                print("truth: ",y)
+            x,y = train_data
+            print("truth: ",y)
             trainer.train(100)
             ind+=batch_size
         
