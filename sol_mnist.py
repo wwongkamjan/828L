@@ -137,7 +137,7 @@ def main(test=False):
                 trainer.network.modules[1].in_layer = layers.Data(x)
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
-                print(y)
+                print("truth: ",y)
             trainer.train(100)
             ind+=batch_size
         
