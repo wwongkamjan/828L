@@ -103,7 +103,7 @@ def test_mnist_acc(module_name, test_data, test_answers):
   thresh = test_answers['acc_final_thresh']
   num_correct, num_total = 0,0
   trainer = test_data["trainer"]
-  mnist = np.load("mnist_mini.pkl", allow_pickle=True)
+  mnist = np.load("mnist.pkl", allow_pickle=True)
   x_train = mnist["training_images"]
   y_train = mnist["training_labels"]
   x_test = mnist["test_images"]
