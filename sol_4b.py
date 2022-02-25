@@ -62,7 +62,7 @@ class Trainer:
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.CrossEntropy(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
-        self.optim = layers.SGDSolver(0.005, self.network.get_modules_with_parameters())
+        self.optim = layers.SGDSolver(0.01, self.network.get_modules_with_parameters())
         return self.data_layer, self.network, self.loss_layer, self.optim
     
     def train_step(self):
@@ -112,19 +112,19 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        data_dict = data.data_4b_3()
+        data_dict = data.data_4b()
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
         trainer.setup(train_data)
         loss = trainer.train(10000)
         # print(trainer.test(test_data))
-        fig = plt.figure()
-        plt.plot(range(10000), loss, label= "default margin")
-        plt.xlabel('iterations')
-        plt.ylabel('loss')
-        plt.show()
-        fig.savefig('4b_3.png')
+        # fig = plt.figure()
+        # plt.plot(range(10000), loss, label= "default margin")
+        # plt.xlabel('iterations')
+        # plt.ylabel('loss')
+        # plt.show()
+        # fig.savefig('4b_3.png')
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.

@@ -139,15 +139,15 @@ def main(test=False):
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
             x,y = train_data
-            print("truth: ",y)
+            # print("truth: ",y)
             trainer.train(10)
             ind+=batch_size
-        
+        np.savez("mnist_weight.npz",weight=trainer.network.state_dict())
         # print(train_data.shape)
-        train_data_test = (train_x[-1000:],train_y[-1000:])
-        test_data = (test_x,test_y)
-        # print(trainer.test(train_data_test))
-        print(trainer.test(test_data))
+        # train_data_test = (train_x[-1000:],train_y[-1000:])
+        # test_data = (test_x,test_y)
+        # # print(trainer.test(train_data_test))
+        # print(trainer.test(test_data))
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
