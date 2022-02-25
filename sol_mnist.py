@@ -123,7 +123,7 @@ def main(test=False):
         # print(train_x.shape) (60000, 784) #(60000,)
         # train_x = train_x[:1000]
         # train_y = train_y[:1000]
-        batch_size = 64
+        batch_size = 256
         num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
         for j in range (num_round):
