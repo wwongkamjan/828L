@@ -228,7 +228,7 @@ class CrossEntropySoftMax:
         # self.out_array = -self.activation[range(self.num_data),self.labels] + np.log(np.sum(np.reshape(np.sum(self.exps,axis=1), (self.num_data,1))))
         self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8), axis=1)
         # print(self.out_array)
-        print(np.argmax(self.activation,axis=1))
+        # print(np.argmax(self.activation,axis=1))
         # self.out_array = -np.log(self.activation)
         # print( "loss ", self.out_array)
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
