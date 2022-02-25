@@ -213,28 +213,28 @@ class CrossEntropySoftMax:
         # self.activation = -1*in_array + np.log(d)
         # print( "activation ", self.activation.shape)
         # print("one-hot label ",self.ones_hot.shape)
-        # print("in ",in_array)
+        print("in ",in_array)
         max_x = np.reshape(np.max(in_array, axis=1), (in_array.shape[0],1))
         # log_exp = max_x + np.log(np.sum(np.exp(in_array - max_x)))
         # exps = np.exp(in_array)
         # exps = np.nan_to_num(np.exp(in_array)*np.exp(-max_x)/np.exp(-max_x))
-        exps = np.exp(in_array - max_x)
-        # print("exps ",exps)
+        self.exps = np.exp(in_array - max_x)
+        print("exps ",self.exps)
         # softmax = -1*in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
-        softmax = exps/np.reshape(np.sum(exps,axis=1), (self.num_data,1))
+        softmax = self.exps/np.reshape(np.sum(self.exps,axis=1), (self.num_data,1))
         self.activation = softmax
         print( "activation ", self.activation)
         # log_likelihood = np.nan_to_num(-np.log(softmax[range(self.num_data),self.labels]))
         # self.out_array = -in_array[range(self.num_data),self.labels] + np.log(np.sum(exps))
         self.out_array = -np.sum(self.ones_hot*np.log(self.activation + 1e-8), axis=0)
         # self.out_array = -np.log(self.activation)
-        print( "loss ", self.out_array)
+        # print( "loss ", self.out_array)
         # self.out_array= np.nan_to_num(-np.sum(self.ones_hot * log_exp))/self.num_data
         # self.out_array= np.nan_to_num(self.activation)/self.num_data
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        input_grad = (self.activation- self.ones_hot)/self.num_data 
+        input_grad = (self.activation- self.ones_hot)/self.num_data * self.activation * (1 - self.activation)
         # grad = self.activation.copy()
         # grad[range(self.num_data),self.labels] -=1
         # input_grad = grad/self.num_data
@@ -253,8 +253,8 @@ class SGDSolver:
             if m.W.shape != m.G.shape:
                 G = np.reshape(np.mean(G, axis=0), (1,m.G.shape[1]))
             m.W -= self.lr*G
-            print("W", m.W)
-            print("G", G)
+            # print("W", m.W)
+            # print("G", G)
             
 
 def is_modules_with_parameters(value):
