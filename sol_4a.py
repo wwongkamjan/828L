@@ -112,7 +112,7 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        data_dict = data.data_4a_1()
+        data_dict = data.data_4a_2()
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
@@ -124,7 +124,7 @@ def main(test=False):
         plt.xlabel('iterations')
         plt.ylabel('loss')
         plt.show()
-        fig.savefig('4a.png')
+        fig.savefig('4a_non.png')
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
