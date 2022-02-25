@@ -96,7 +96,7 @@ class Trainer:
         predict = self.network.get_output_layer().forward()
         error = 0
         for i in range(len(predict)):
-            error += predict[i] - y[i]
+            error += np.abs(predict[i] - y[i])
             print("predict: ", predict[i], " label: ", y[i])
         return np.sum(error)
     
@@ -115,7 +115,7 @@ def main(test=False):
         test_data = data_dict['test']
         trainer.setup(train_data)
         trainer.train(30000)
-        # print(trainer.test(test_data))
+        print(trainer.test(test_data))
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
