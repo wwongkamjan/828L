@@ -112,13 +112,19 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        data_dict = data.data_4a_1()
+        data_dict = data.data_4a()
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
         trainer.setup(train_data)
-        trainer.train(30000)
-        print(trainer.test(test_data))
+        loss = trainer.train(10000)
+        # print(trainer.test(test_data))
+        fig = plt.figure()
+        plt.plot(range(10000), loss, label= "default margin")
+        plt.xlabel('iterations')
+        plt.ylabel('loss')
+        plt.show()
+        fig.savefig('4b.png')
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.

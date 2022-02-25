@@ -113,16 +113,16 @@ def main(test=False):
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
-        num_layers = 20
+        num_layers = 3
         trainer.setup(train_data, num_layers)
-        loss = trainer.train(10000)
+        loss = trainer.train(30000)
         # print(trainer.test(test_data))
-        fig = plt.figure()
-        plt.plot(range(10000), loss, label= "depth: "+str(num_layers))
-        plt.xlabel('iterations')
-        plt.ylabel('loss')
-        plt.show()
-        fig.savefig('3b_10.png')
+        # fig = plt.figure()
+        # plt.plot(range(10000), loss, label= "depth: "+str(num_layers))
+        # plt.xlabel('iterations')
+        # plt.ylabel('loss')
+        # plt.show()
+        # fig.savefig('3b_10.png')
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
         out = {
