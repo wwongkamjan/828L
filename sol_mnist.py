@@ -2,7 +2,7 @@ import layers
 import numpy as np
 import matplotlib.pyplot as plt
 import data_generators as data
-import pickle
+
 
 class Network(layers.BaseNetwork):
     #TODO: you might need to pass additional arguments to init for prob 2, 3, 4 and mnist
@@ -113,8 +113,7 @@ def main(test=False):
     #DO NOT REMOVE THESE IF/ELSE
     if not test:
         # Your code goes here.
-        with open('mnist.pkl', 'rb') as f:
-            mnist_data = pickle.load(f)
+        mnist_data = np.load("mnist.pkl", allow_pickle=True)
 
         train_x = mnist_data['training_images']
         test_x = mnist_data['test_images']
