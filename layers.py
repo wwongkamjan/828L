@@ -253,8 +253,8 @@ class SGDSolver:
             if m.W.shape != m.G.shape:
                 G = np.reshape(np.mean(G, axis=0), (1,m.G.shape[1]))
             m.W -= self.lr*G
-            # print("W", m.W)
-            # print("G", G)
+            print("W", m.W)
+            print("G", G)
             
 
 def is_modules_with_parameters(value):
