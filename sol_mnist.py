@@ -145,9 +145,9 @@ def main(test=False):
         np.savez("mnist_weight.npz",weight=trainer.network.state_dict())
         # print(train_data.shape)
         # train_data_test = (train_x[-1000:],train_y[-1000:])
-        # test_data = (test_x,test_y)
+        test_data = (test_x,test_y)
         # # print(trainer.test(train_data_test))
-        # print(trainer.test(test_data))
+        print(trainer.test(test_data))
 
     else:
         #DO NOT CHANGE THIS BRANCH! This branch is used for autograder.
