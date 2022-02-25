@@ -153,8 +153,8 @@ class Sigmoid:
         self.in_array = self.in_layer.forward()
         # TODO: Compute the result of sigmoid function, and store it as self.out_array. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
         in_array = self.in_array.copy()
-        in_array = np.minimum(in_array, 708)
-        in_array = np.maximum(in_array, -708)
+        # in_array = np.minimum(in_array, 708)
+        # in_array = np.maximum(in_array, -708)
         self.out_array = np.exp(in_array)/((1+np.exp(-1*in_array))*np.exp(in_array))
         # print(self.out_array.shape)
         return self.out_array
