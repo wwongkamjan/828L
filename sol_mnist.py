@@ -59,7 +59,7 @@ class Trainer:
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
         #TODO: construct the network. you don't have to use define_network.
-        self.network = self.define_network(self.data_layer,{"hidden_units": [128,64,10], "hidden_layers":3})
+        self.network = self.define_network(self.data_layer,{"hidden_units": [64,64,10], "hidden_layers":3})
         #TODO: use the appropriate loss function here
         self.loss_layer = layers.CrossEntropySoftMax(self.network.output_layer, y)
         #TODO: construct the optimizer class here. You can retrieve all modules with parameters (thus need to be optimized be the optimizer) by "network.get_modules_with_parameters()"
@@ -123,7 +123,7 @@ def main(test=False):
         # print(train_x.shape) (60000, 784) #(60000,)
         # train_x = train_x[:1000]
         # train_y = train_y[:1000]
-        batch_size = 256
+        batch_size = 128
         num_round = int(np.ceil(train_x.shape[0]/batch_size))
         ind = 0
         for j in range (num_round):
@@ -138,7 +138,7 @@ def main(test=False):
                 # print(trainer.network.modules[1].in_layer)
                 trainer.loss_layer.set_data(y)
                 print(y)
-            trainer.train(1000)
+            trainer.train(100)
             ind+=batch_size
         
         # print(train_data.shape)
