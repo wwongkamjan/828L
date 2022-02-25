@@ -53,7 +53,7 @@ class Trainer:
         network = Network(data_layer, hidden_units, hidden_layers)
         return network
     
-    def setup(self, training_data):#, num_layers)
+    def setup(self, training_data): #, num_layers)
         x, y = training_data
         #TODO: define input data layer
         self.data_layer = layers.Data(x)
