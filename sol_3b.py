@@ -113,12 +113,11 @@ def main(test=False):
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
-        num_layers = [5,8,10]
-        for i in range (3):
-            trainer.setup(train_data, num_layers[i])
-            loss = trainer.train(30000)
+        num_layers = 5
+        trainer.setup(train_data, num_layers)
+        loss = trainer.train(30000)
         # print(trainer.test(test_data))
-            plt.plot(range(30000), loss, label= "depth: "+str(num_layers[i]))
+        plt.plot(range(30000), loss, label= "depth: "+str(num_layers))
         plt.xlabel('iterations')
         plt.ylabel('loss')
         plt.show()
