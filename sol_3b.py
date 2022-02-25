@@ -113,8 +113,8 @@ def main(test=False):
         train_data = data_dict['train']
         # print(train_data.shape)
         test_data = data_dict['test']
-        num_layers = [5,8,10,20]
-        for i in range (4):
+        num_layers = [5,8,10]
+        for i in range (3):
             trainer.setup(train_data, num_layers[i])
             loss = trainer.train(30000)
         # print(trainer.test(test_data))
