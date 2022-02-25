@@ -118,7 +118,7 @@ def main(test=False):
             trainer.setup(train_data, num_layers[i])
             loss = trainer.train(30000)
         # print(trainer.test(test_data))
-            plt.plot(range(30000), loss, label= "depth: "+int(num_layers[i]))
+            plt.plot(range(30000), loss, label= "depth: "+str(num_layers[i]))
         plt.xlabel('iterations')
         plt.ylabel('loss')
         plt.show()
