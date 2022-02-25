@@ -234,10 +234,10 @@ class CrossEntropySoftMax:
         return self.out_array
     def backward(self):
         # TODO: Compute grad of loss with respect to inputs, and hand this gradient backward to the layer behind. Be careful! Don't exponentiate an arbitrary positive number as it may overflow. 
-        # input_grad = (self.activation- self.ones_hot)/self.num_data 
-        grad = self.activation.copy()
-        grad[range(self.num_data),self.labels] -=1
-        input_grad = grad/self.num_data
+        input_grad = (self.activation- self.ones_hot)/self.num_data 
+        # grad = self.activation.copy()
+        # grad[range(self.num_data),self.labels] -=1
+        # input_grad = grad/self.num_data
         self.in_layer.backward(input_grad)
         
 class SGDSolver:
@@ -249,10 +249,12 @@ class SGDSolver:
             # TODO: Update the weights of each module (m.W) with gradient descent. Hint1: remember we store the gradients for each layer in self.G during backward pass. Hint2: we can update gradient in place with -= or += operator.
             # print("W ", m.W.shape)
             # print("G ", m.G.shape)
-            new_W = m.G.copy()
+            G = m.G.copy()
             if m.W.shape != m.G.shape:
-                new_W = np.reshape(np.mean(new_W, axis=0), (1,m.G.shape[1]))
-            m.W -= self.lr*new_W
+                G = np.reshape(np.mean(new_W, axis=0), (1,m.G.shape[1]))
+            m.W -= self.lr*G
+            print("W", m.W)
+            print("G", G)
             
 
 def is_modules_with_parameters(value):
